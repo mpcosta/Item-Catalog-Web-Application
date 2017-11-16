@@ -1,0 +1,52 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+<div class="row top-menu">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 text-right">
+    </div>
+</div>
+<div class="row divider blue">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner main">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 ">
+        <h1 class="mainTitle">Tech Catalog</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 padding-right">
+        <div class="row padding-top padding-bottom">
+            <h1>Categories</h1>
+
+        </div>
+        {% for category in categories %}
+        <a href="">
+            <div class="row">
+                <div class="col-md-12"></div>
+                <div class="col-md-12 catalog-list">
+                    <h3>{{category.name}}</h3>
+                </div>
+                <div class="col-md-12"></div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="col-lg-6 padding-left">
+        <div class="row padding-top padding-bottom">
+            <h1>Latest 3 Items</h1>
+
+        </div>
+        {% for item in latest_items %}
+        <a href="">
+            <div class="row">
+                <div class="col-md-12"></div>
+                <div class="col-md-12 catalog-list">
+                    <h3>{{item.title}}</h3>
+                </div>
+                <div class="col-md-12"></div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
