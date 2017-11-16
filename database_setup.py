@@ -39,7 +39,7 @@ class Item(Base):
     description = Column(String(250))
     price = Column(String(8))
     date_created = Column(DateTime, server_default=func.now())
-    last_modified = Column(DateTime, onupdate=func.utc_timestamp())
+    last_modified = Column(DateTime, onupdate=func.current_timestamp())
 
     ctg_id = Column(Integer, ForeignKey('categories.ctg_id'))
     categories = relationship(Categories)
