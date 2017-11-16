@@ -35,9 +35,11 @@ def showCatalog():
 # Show the items related to Category
 @app.route('/catalog/<catalog_name>/items/')
 def showCategoryItems(catalog_name):
+    print " This is " , catalog_name
+    category = session.query(Categories).filter_by(name=catalog_name).first()
+    items = session.query(Item).filter_by(ctg_id=category.ctg_id)
+    return render_template('category.html', category=category, items=items)
 
-    assert catalog_name == request.view_args['catalog_name']
-    return "This is catalog items !"
 
 # Show specific item info
 @app.route('/catalog/<catalog_name>/<item_name>/')
