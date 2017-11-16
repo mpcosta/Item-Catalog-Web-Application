@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
-from sqlalchemy import create_engine, asc
+from sqlalchemy import create_engine, asc, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Categories, Item, User
 from flask import session as login_session
@@ -27,12 +27,15 @@ session = DBSession()
 @app.route('/')
 @app.route('/catalog/')
 def showCatalog():
-    return "This is catalog main page !"
+    categories = session.query(Categories)
+    items = session.query(Item).order_by(desc(Item.date_created)).limit(3)
+    return render_template('index.html', categories=categories, latest_items=items)
 
 
 # Show the items related to Category
 @app.route('/catalog/<catalog_name>/items/')
 def showCategoryItems(catalog_name):
+
     assert catalog_name == request.view_args['catalog_name']
     return "This is catalog items !"
 
