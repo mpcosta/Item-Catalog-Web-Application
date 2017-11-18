@@ -1,0 +1,37 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+<div class="row top-menu">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 text-right">
+    </div>
+</div>
+<div class="row divider blue">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner main">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 ">
+        <h1 class="mainTitle">Tech Catalog</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row padding-top padding-bottom">
+            <h1>{{category.name}}</h1>
+
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">{{item.title}}</h4>
+                <h6 class="card-subtitle mb-4 text-muted">Created On - {{item.date_created}}</h6>
+                <p class="card-text padding-right">{{item.description}}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Price - {{item.price}}</li>
+                </ul>
+                <div class="card-block">
+                    <a href="{{item.url}}" target="_blank" class="card-link">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
