@@ -38,6 +38,7 @@ class Item(Base):
     title = Column(String(80), nullable=False)
     description = Column(String(250))
     price = Column(String(8))
+    url = Column(String, nullable=False)
     date_created = Column(DateTime, server_default=func.now())
     last_modified = Column(DateTime, onupdate=func.current_timestamp())
 
