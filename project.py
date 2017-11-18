@@ -43,8 +43,15 @@ def showCategoryItems(catalog_name):
 
 # Show specific item info
 @app.route('/catalog/<catalog_name>/<item_name>/')
-def showCategoryItem():
-    return "This is catalog specific item !"
+def showCategoryItem(catalog_name, item_name):
+    # If catalog_name is an ID translate it to item name
+    if (len(catalog_name) == 1):
+        category = session.query(Categories).filter_by(ctg_id=catalog_name).first()
+    else:
+        category = session.query(Categories).filter_by(name=catalog_name).first()
+    #items = session.query(Item).filter_by(ctg_id=category.ctg_id)
+    item = session.query(Item).filter_by(title=item_name).first()
+    return render_template('item.html', category=category.name, item=item)
 
 
 # Allow Edit of Item
