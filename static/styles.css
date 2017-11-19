@@ -64,6 +64,22 @@ h3 {
 .padding-none {
 	padding: 0;
 }
+
+.form-label {
+    font-weight: 500 !important;
+    font-size: 2rem !important; 
+}
+
+.form-height {
+    height: 35px !important;
+}
+
+.form-btn{
+    background-color: white !important;
+    padding: 15px !important;
+}
+
+
 .btn {
 	padding: 20px;
 	margin: 0;
@@ -74,13 +90,24 @@ h3 {
 .btn:hover {
 	border-color: #607D8B;
 }
+
+.btn.success {
+    border-color: #aaaaaa !important;
+	color: #aaaaaa !important;
+}
+
+.btn.success:hover {
+    border-color: #9FB80A !important;
+	color: #9FB80A !important;
+}
+
 .btn.delete {
-	border-color: #aaaaaa;
-	color: #aaaaaa;
+	border-color: #aaaaaa !important;
+	color: #aaaaaa !important;
 }
 .btn.delete:hover {
-	border-color: #aaaaaa;
-	color: red;
+	border-color: red !important;
+	color: red !important;
 }
 .glyphicon {
 	margin-right: 10px;
