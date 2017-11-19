@@ -65,9 +65,10 @@ def deleteCategoryItem():
     return "This is catalog delete item !"
 
 # JSON endpoint
-@app.route('/catalog.json/')
+@app.route('/catalog/JSON/')
 def getCatalogJson():
-    return "This is catalog json return !"
+    catalogItems = session.query(Item).all()
+    return jsonify(catalogItems=[r.serialize for r in catalogItems])
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
