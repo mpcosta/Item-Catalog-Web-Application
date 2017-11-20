@@ -24,27 +24,40 @@
                 <form action="#" method="post">
                     <div class="form-group">
                         <label for="name" class="form-label">Item Name</label>
-                        <input type="text" maxlength="100" class="form-control mb-3 form-height font-weight-normal" name="name" value="Item Name">
+                        <input type="text" maxlength="100" class="form-control mb-3 form-height font-weight-normal" name="name" value="{{item.title}}">
 
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control mb-3 form-height font-weight-normal" maxlength="250" rows="3" name="description">Item Desc</textarea>
+                        <textarea class="form-control mb-3 form-height font-weight-normal" maxlength="250" rows="3" name="description">{{item.description}}</textarea>
 
                         <label for="price" class="form-label">Price</label>
                         <div class="input-group mb-3">
                             <div class="input-group-addon">$</div>
-                            <input type="text" maxlength="10" class="form-control form-height font-weight-normal" name="price" value="Item Price">
+                            <input type="text" maxlength="10" class="form-control form-height font-weight-normal" name="price" value="{{item.price}}">
                         </div>
                         <label for="name" class="form-label">Item URL</label>
-                        <input type="text" class="form-control mb-3 form-height font-weight-normal" name="url" value="Item URL">
+                        <input type="text" class="form-control mb-3 form-height font-weight-normal" name="url" value="{{item.url}}">
                         <label for="course" class="form-label">Category</label>
-                        <select class="form-control mb-5 form-height font-weight-normal" id="exampleSelect2">
-                          <option>Computers and Laptops</option>
-                          <option>Smartphones and Tablets</option>
-                          <option>Games and Movies</option>
-                        </select>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label font-weight-normal">
+                            <input type="radio" class="form-check-input" name="optionsRadios" id="cat1" value="1" {% if item.ctg_id == 1%}checked{%endif%}>
+                            Computers and Laptops
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label font-weight-normal">
+                            <input type="radio" class="form-check-input" name="optionsRadios" id="cat2" value="2" {% if item.ctg_id == 2%}checked{%endif%}>
+                            Smartphones and Tablets
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label font-weight-normal">
+                            <input type="radio" class="form-check-input" name="optionsRadios" id="cat3" value="3" {% if item.ctg_id == 3%}checked{%endif%}>
+                            Games and Movies
+                          </label>
+                        </div>
                         <button type="submit" class="btn btn-default form-btn success" id="submit" type="submit">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
-                        <a href=''>
+                        <a href='{{url_for('showCatalog')}}'>
 						<button class="btn btn-default form-btn delete">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
 					</a>

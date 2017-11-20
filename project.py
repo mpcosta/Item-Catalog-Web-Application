@@ -35,7 +35,6 @@ def showCatalog():
 # Show the items related to Category
 @app.route('/catalog/<catalog_name>/items/')
 def showCategoryItems(catalog_name):
-    print " This is " , catalog_name
     category = session.query(Categories).filter_by(name=catalog_name).first()
     items = session.query(Item).filter_by(ctg_id=category.ctg_id)
     return render_template('category.html', category=category, items=items)
@@ -56,13 +55,40 @@ def showCategoryItem(catalog_name, item_name):
 
 # Allow Edit of Item
 @app.route('/catalog/<catalog_name>/<item_name>/edit/', methods=['GET', 'POST'])
-def editCategoryItem():
-    return "This is catalog edit item !"
+def editCategoryItem(catalog_name, item_name):
+
+
+
+    if request.method == 'POST':
+        editedItem = session.query(Item).filter_by(title=item_name).first()
+
+        if request.form['name']:
+            editedItem.title = request.form['name']
+        #if request.form['']
+        #    editedItem.title = request.form['name']
+
+
+
+
+
+
+
+
+            #flash('Item Successfully Edited %s' % editedItem.name)
+
+
+        return redirect(url_for('showCatalog'))
+    else:
+        # Get Resquest
+        category = session.query(Categories).filter_by(name=catalog_name).first()
+        item = session.query(Item).filter_by(title=item_name).first()
+        return render_template('editItem.html', category=category.name, item=item)
 
 # Allow Delete of Item
-@app.route('/catalog/<catalog_name>/<item_name>/delete/', methods=['GET', 'POST'])
+#@app.route('/catalog/<catalog_name>/<item_name>/delete/', methods=['GET', 'POST'])
+@app.route('/catalog/delete/', methods=['GET', 'POST'])
 def deleteCategoryItem():
-    return "This is catalog delete item !"
+    return render_template('deleteItem.html')
 
 # JSON endpoint
 @app.route('/catalog/JSON/')
