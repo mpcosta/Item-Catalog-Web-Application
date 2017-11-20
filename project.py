@@ -33,29 +33,25 @@ def showCatalog():
 
 
 # Show the items related to Category
-@app.route('/catalog/<catalog_name>/items/')
-def showCategoryItems(catalog_name):
-    category = session.query(Categories).filter_by(name=catalog_name).first()
+@app.route('/catalog/<int:catalog_id>/items/')
+def showCategoryItems(catalog_id):
+    category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
     items = session.query(Item).filter_by(ctg_id=category.ctg_id)
     return render_template('category.html', category=category, items=items)
 
 
 # Show specific item info
-@app.route('/catalog/<catalog_name>/<item_name>/')
-def showCategoryItem(catalog_name, item_name):
-    # If catalog_name is an ID translate it to item name
-    if (len(catalog_name) == 1):
-        category = session.query(Categories).filter_by(ctg_id=catalog_name).first()
-    else:
-        category = session.query(Categories).filter_by(name=catalog_name).first()
+@app.route('/catalog/<int:catalog_id>/<item_name>/')
+def showCategoryItem(catalog_id, item_name):
+    category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
     #items = session.query(Item).filter_by(ctg_id=category.ctg_id)
     item = session.query(Item).filter_by(title=item_name).first()
-    return render_template('item.html', category=category.name, item=item)
+    return render_template('item.html', category=category.ctg_id, item=item)
 
 
 # Allow Edit of Item
-@app.route('/catalog/<catalog_name>/<item_name>/edit/', methods=['GET', 'POST'])
-def editCategoryItem(catalog_name, item_name):
+@app.route('/catalog/<int:catalog_id>/<item_name>/edit/', methods=['GET', 'POST'])
+def editCategoryItem(catalog_id, item_name):
 
 
 
@@ -80,9 +76,9 @@ def editCategoryItem(catalog_name, item_name):
         return redirect(url_for('showCatalog'))
     else:
         # Get Resquest
-        category = session.query(Categories).filter_by(name=catalog_name).first()
+        category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
         item = session.query(Item).filter_by(title=item_name).first()
-        return render_template('editItem.html', category=category.name, item=item)
+        return render_template('editItem.html', category=category.ctg_id, item=item)
 
 # Allow Delete of Item
 #@app.route('/catalog/<catalog_name>/<item_name>/delete/', methods=['GET', 'POST'])

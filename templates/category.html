@@ -20,7 +20,7 @@
 
         </div>
         {% for item in items %}
-        <a href="{{url_for('showCategoryItem', catalog_name = category.name, item_name = item.title)}}">
+        <a href="{{url_for('showCategoryItem', catalog_id = category.ctg_id, item_name = item.title)}}">
             <div class="row">
                 <div class="col-md-12"></div>
                 <div class="col-md-12 catalog-list">
