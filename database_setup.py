@@ -21,7 +21,6 @@ class Categories(Base):
     ctg_id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
 
-
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
