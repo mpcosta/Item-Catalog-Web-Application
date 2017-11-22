@@ -287,11 +287,19 @@ def deleteCategoryItem(catalog_id, item_name):
     else:
         return render_template('deleteItem.html', category=category, item=deleteItem)
 
-# JSON endpoint
+# JSON endpoint for all items
 @app.route('/catalog/JSON/')
 def getCatalogJson():
     catalogItems = session.query(Item).all()
     return jsonify(catalogItems=[r.serialize for r in catalogItems])
+
+# JSON endpoint for specific item
+@app.route('/catalog/<int:catalog_id>/<item_name>/JSON/')
+def getCatalogItemJson(catalog_id, item_name):
+    category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
+    catalogItem = session.query(Item).filter_by(title=item_name).first()
+    return jsonify(catalogItem=catalogItem.serialize)
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
