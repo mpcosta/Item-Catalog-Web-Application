@@ -1,12 +1,4 @@
 {% extends "main.html" %} {% block content %} {% include "header.html" %}
-<div class="row top-menu">
-    <div class="col-md-10"></div>
-    <div class="col-md-2 text-right">
-    </div>
-</div>
-<div class="row divider blue">
-    <div class="col-md-12"></div>
-</div>
 <div class="row banner main">
     <div class="col-md-1"></div>
     <div class="col-md-11 ">
@@ -17,7 +9,7 @@
     <div class="col-lg-6 padding-right">
         <div class="row padding-top padding-bottom">
             <h1>Edit Item</h1>
-    
+
         </div>
         <div class="row">
             <div class="col-md-12 col-md-offset-1 col-lg-12 mb-3">
@@ -55,14 +47,14 @@
                             Games and Movies
                           </label>
                         </div>
-                        <button type="submit" class="btn btn-default form-btn success" id="submit" type="submit">
-					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
-                        <a href=''>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default form-btn success mr-4" id="submit" type="submit">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+                </form>
+                <a href='{{url_for('showCategoryItems', catalog_id=item.ctg_id)}}'>
 						<button class="btn btn-default form-btn delete">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
-					</a>
-                    </div>
-                </form>
-            </div>
+				</a>
         </div>
         {% endblock %}
