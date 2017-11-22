@@ -48,43 +48,65 @@ def showCategoryItem(catalog_id, item_name):
     item = session.query(Item).filter_by(title=item_name).first()
     return render_template('item.html', category=category.ctg_id, item=item)
 
+# Allow Creation of Item
+@app.route('/catalog/new/', methods=['GET', 'POST'])
+def newCategoryItem():
+    #category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
+    if request.method == 'POST':
 
-# Allow Edit of Item
+        if request.form['name'] and \
+           request.form['description'] and \
+           request.form['price'] and \
+           request.form['url'] and \
+           request.form['optionsCategory']:
+
+            newItem = Item(title=request.form['name'], description=request.form['description'],
+                        price=request.form['price'], url=request.form['url'],
+                        ctg_id=request.form['optionsCategory'], user_id=1)
+            session.add(newItem)
+            flash('Item Successfully Created')
+            session.commit()
+            return redirect(url_for('showCategoryItem', catalog_id=newItem.ctg_id, item_name=newItem.title))
+        else:
+            flash('New Item could not be created due to missing field.')
+            return redirect(url_for('newCategoryItem'))
+    else:
+        return render_template('newItem.html')
+
+
+
+# Allow Editing of Item
 @app.route('/catalog/<int:catalog_id>/<item_name>/edit/', methods=['GET', 'POST'])
 def editCategoryItem(catalog_id, item_name):
-
-
+    editedItem = session.query(Item).filter_by(title=item_name).first()
 
     if request.method == 'POST':
-        editedItem = session.query(Item).filter_by(title=item_name).first()
-
         if request.form['name']:
             editedItem.title = request.form['name']
-        #if request.form['']
-        #    editedItem.title = request.form['name']
-
-
-
-
-
-
-
-
-            #flash('Item Successfully Edited %s' % editedItem.name)
-
-
-        return redirect(url_for('showCatalog'))
+        if request.form['description']:
+            editedItem.description = request.form['description']
+        if request.form['price']:
+            editedItem.price = request.form['price']
+        if request.form['url']:
+            editedItem.url = request.form['url']
+        if request.form['optionsCategory']:
+            editedItem.ctg_id = request.form['optionsCategory']
+        session.commit()
+        flash('%s Item Successfully Edited' % editedItem.title)
+        return redirect(url_for('showCategoryItem', catalog_id=editedItem.ctg_id, item_name=editedItem.title))
     else:
         # Get Resquest
-        category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
-        item = session.query(Item).filter_by(title=item_name).first()
-        return render_template('editItem.html', category=category.ctg_id, item=item)
+        return render_template('editItem.html', category=editedItem.ctg_id, item=editedItem)
 
-# Allow Delete of Item
-#@app.route('/catalog/<catalog_name>/<item_name>/delete/', methods=['GET', 'POST'])
-@app.route('/catalog/delete/', methods=['GET', 'POST'])
-def deleteCategoryItem():
-    return render_template('deleteItem.html')
+# Allow Removal of Item
+@app.route('/catalog/<int:catalog_id>/<item_name>/delete/', methods=['GET', 'POST'])
+def deleteCategoryItem(catalog_id, item_name):
+    deleteItem = session.query(Item).filter_by(title=item_name).first()
+
+    if request.method == 'POST':
+        print "ddd"
+    else:
+        return render_template('deleteItem.html')
 
 # JSON endpoint
 @app.route('/catalog/JSON/')
