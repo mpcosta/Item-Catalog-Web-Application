@@ -17,7 +17,7 @@
     <div class="col-lg-6 padding-right">
         <div class="row padding-top padding-bottom">
             <h1>Edit Item</h1>
-
+    
         </div>
         <div class="row">
             <div class="col-md-12 col-md-offset-1 col-lg-12 mb-3">
@@ -34,30 +34,30 @@
                             <div class="input-group-addon">$</div>
                             <input type="text" maxlength="10" class="form-control form-height font-weight-normal" name="price" value="{{item.price}}">
                         </div>
-                        <label for="name" class="form-label">Item URL</label>
+                        <label for="url" class="form-label">Item URL</label>
                         <input type="text" class="form-control mb-3 form-height font-weight-normal" name="url" value="{{item.url}}">
-                        <label for="course" class="form-label">Category</label>
+                        <label for="category" class="form-label">Category</label>
                         <div class="form-check mb-3">
                             <label class="form-check-label font-weight-normal">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="cat1" value="1" {% if item.ctg_id == 1%}checked{%endif%}>
+                            <input type="radio" class="form-check-input" name="optionsCategory" id="cat1" value="1" {% if item.ctg_id == 1%}checked{%endif%}>
                             Computers and Laptops
                           </label>
                         </div>
                         <div class="form-check mb-3">
                             <label class="form-check-label font-weight-normal">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="cat2" value="2" {% if item.ctg_id == 2%}checked{%endif%}>
+                            <input type="radio" class="form-check-input" name="optionsCategory" id="cat2" value="2" {% if item.ctg_id == 2%}checked{%endif%}>
                             Smartphones and Tablets
                             </label>
                         </div>
                         <div class="form-check mb-3">
                             <label class="form-check-label font-weight-normal">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="cat3" value="3" {% if item.ctg_id == 3%}checked{%endif%}>
+                            <input type="radio" class="form-check-input" name="optionsCategory" id="cat3" value="3" {% if item.ctg_id == 3%}checked{%endif%}>
                             Games and Movies
                           </label>
                         </div>
                         <button type="submit" class="btn btn-default form-btn success" id="submit" type="submit">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
-                        <a href='{{url_for('showCatalog')}}'>
+                        <a href=''>
 						<button class="btn btn-default form-btn delete">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
 					</a>

@@ -46,6 +46,11 @@ h3 {
  	color: #0093B9;
  	line-height: 17px;
  }
+
+.flash-error {
+    background-color: #FFCCCC !important;
+}
+
 .padding-top {
 	padding-top: 30px;
 }
