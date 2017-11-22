@@ -1,0 +1,76 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+<div class="row top-menu">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 text-right">
+    </div>
+</div>
+<div class="row divider blue">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner main">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 ">
+        <h1 class="mainTitle">Tech Catalog</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 padding-right">
+        <div class="row padding-top padding-bottom">
+            <h1>New Item</h1>
+            <div class='flash flash-error'>
+                {% with messages = get_flashed_messages() %} {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                    <li> <strong> {{ message }} </strong> </li>
+                    {% endfor %}
+                </ul>
+                {% endif %} {% endwith %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-md-offset-1 col-lg-12 mb-3">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Item Name</label>
+                        <input type="text" maxlength="100" class="form-control mb-3 form-height font-weight-normal" name="name" value="">
+
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control mb-3 form-height font-weight-normal" maxlength="250" rows="3" name="description"></textarea>
+
+                        <label for="price" class="form-label">Price</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" maxlength="10" class="form-control form-height font-weight-normal" name="price" value="">
+                        </div>
+                        <label for="url" class="form-label">Item URL</label>
+                        <input type="text" class="form-control mb-3 form-height font-weight-normal" name="url" value="">
+                        <label for="category" class="form-label">Category</label>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label font-weight-normal">
+                            <input type="radio" class="form-check-input" name="optionsCategory" id="cat1" value="1">
+                            Computers and Laptops
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label font-weight-normal">
+                            <input type="radio" class="form-check-input" name="optionsCategory" id="cat2" value="2">
+                            Smartphones and Tablets
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <label class="form-check-label font-weight-normal">
+                            <input type="radio" class="form-check-input" name="optionsCategory" id="cat3" value="3">
+                            Games and Movies
+                          </label>
+                        </div>
+                        <button type="submit" class="btn btn-default form-btn success" id="submit" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+                        <a href=''>
+						<button class="btn btn-default form-btn delete">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+					</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endblock %}
