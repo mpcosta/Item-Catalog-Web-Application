@@ -51,7 +51,6 @@ def showCategoryItem(catalog_id, item_name):
 # Allow Creation of Item
 @app.route('/catalog/new/', methods=['GET', 'POST'])
 def newCategoryItem():
-    #category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
     if request.method == 'POST':
 
         if request.form['name'] and \
@@ -101,12 +100,15 @@ def editCategoryItem(catalog_id, item_name):
 # Allow Removal of Item
 @app.route('/catalog/<int:catalog_id>/<item_name>/delete/', methods=['GET', 'POST'])
 def deleteCategoryItem(catalog_id, item_name):
+    category = session.query(Categories).filter_by(ctg_id=catalog_id).first()
     deleteItem = session.query(Item).filter_by(title=item_name).first()
-
     if request.method == 'POST':
-        print "ddd"
+        session.delete(deleteItem)
+        flash('Item Successfully Deleted')
+        session.commit()
+        return redirect(url_for('showCategoryItems', catalog_id=category.ctg_id))
     else:
-        return render_template('deleteItem.html')
+        return render_template('deleteItem.html', category=category, item=deleteItem)
 
 # JSON endpoint
 @app.route('/catalog/JSON/')
